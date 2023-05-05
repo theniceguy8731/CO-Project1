@@ -1,2 +1,1 @@
-General syntax error: line 3
-General syntax error: line 6
+error : use of undefined labels 6

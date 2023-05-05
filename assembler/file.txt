@@ -1,9 +1,10 @@
-var X
-lab:
-mov R1 $10
-la;b1:
-mov R2 $100
-mul R3 R2 R1
-xxxxxxxxxxx
-st R3 X
+var var1
+var var2
+var var3
+ld R1 var1
+ld R2 var2
+st R3 var3
+jmp hlt_label
+add R1 R2 R3
+hlt_label:
 hlt
