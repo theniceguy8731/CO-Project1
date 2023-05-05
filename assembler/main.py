@@ -189,7 +189,37 @@ def error_check(list):
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-def bin_gen():
+len_without_varz=len(list)-len(varz)
+def conv_a():
+    return
+def conv_b():
+    return
+def conv_c():
+    return
+def conv_d():
+    return
+def conv_e():
+    return
+def conv_f():
+    return
+def bin_gen(list):
+    for i in range(len(list)):
+        temp_inst=rem_label(list[i])
+        if i in inst:
+            temp_inst=rem_label(list[i])
+            if temp_inst[:2] in mms[:6]:
+                conv_a(temp_inst,i)
+            elif temp_inst[:2] in mms[6:9] and '$' in temp_inst:
+                conv_b(temp_inst,i)
+            elif temp_inst[:2] in mms[9:13]: 
+                conv_c(temp_inst,i)
+            elif temp_inst[:2] in mms[13:15]:
+                conv_d(temp_inst,i)
+            elif temp_inst[:2] in mms[15:19]:
+                conv_e(temp_inst,i)
+            elif temp_inst[:2] in mms[19:20]:
+                conv_f(temp_inst,i)    
+        pass
     
     return
 
