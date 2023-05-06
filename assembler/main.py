@@ -8,6 +8,7 @@ sp_sym=',$#@!%^&*()\{\}[]-+=\|;:""<>,.?/`~'
 op_codes={'A':{'add':'00000','sub':'00001','mul':'00110','xor':'01010','or':'01011','and':'01100'},'B':{'mov':'00010','rs':'01000','ls':'01001'},'C':{'mov':'00011','div':'00111','not':'01101','cmp':'01110'},'D':{'ld':'00100','st':'00101'},'E':{'jmp':'01111','jlt':'11100','jgt':'11101','je':'11111'},'F':{'hlt':'11010'}}
 regs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','R6':'110','FLAGS':'111'}
 file=open('./errors.txt','w')
+ans=open('./bin.txt','w')
 #functions for some specific checks
 
 
@@ -189,19 +190,91 @@ def error_check(list):
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
-len_without_varz=len(list)-len(varz)
-def conv_a():
+def conv_a(s,n):
+    bin=''
+    for x in op_codes['A'].keys():
+        if s[:3]==x:
+            bin+=op_codes['A'][x]
+        elif s[:2]==x:
+            bin+=op_codes['A'][x]
+    bin+='0'*2
+    y,a,b,c=s.split(' ')
+    bin+=regs[a]
+    bin+=regs[b]
+    bin+=regs[c]
+    print_bin(bin)
     return
-def conv_b():
+def conv_b(s,n):
+    bin=''
+    for x in op_codes['B'].keys():
+        if s[:3]==x:
+            bin+=op_codes['B'][x]
+        elif s[:2]==x:
+            bin+=op_codes['B'][x]
+    bin+='0'*1
+    y,a,b=s.split(' ')
+    b=b[1:]
+    bin+=regs[a]
+    bin+=format(int(b),'07b')
+    print_bin(bin)
     return
-def conv_c():
+def conv_c(s,n):
+    bin=''
+    for x in op_codes['C'].keys():
+        if s[:3]==x:
+            bin+=op_codes['C'][x]
+        elif s[:2]==x:
+            bin+=op_codes['C'][x]
+    bin+='0'*5
+    y,a,b=s.split(' ')
+    bin+=regs[a]
+    bin+=regs[b]
+    print_bin(bin)
     return
-def conv_d():
+def conv_d(s,n):
+    bin=''
+    for x in op_codes['D'].keys():
+        if s[:3]==x:
+            bin+=op_codes['D'][x]
+        elif s[:2]==x:
+            bin+=op_codes['D'][x]
+    bin+='0'*1
+    y,a,b=s.split(' ')
+    bin+=regs[a]
+    global len_without_varz
+    bin+=format(len_without_varz+varz[b],"07b")
+    print_bin(bin)
     return
-def conv_e():
+def conv_e(s,n):
+    bin=''
+    for x in op_codes['E'].keys():
+        if s[:3]==x:
+            bin+=op_codes['E'][x]
+        elif s[:2]==x:
+            bin+=op_codes['E'][x]
+    bin+='0'*4
+    y,b=s.split(' ')
+    bin+=format(labels[b]-len(varz),"07b")
+    print_bin(bin)
     return
-def conv_f():
+def conv_f(s,n):
+    bin=''
+    for x in op_codes['F'].keys():
+        if s[:3]==x:
+            bin+=op_codes['F'][x]
+        elif s[:2]==x:
+            bin+=op_codes['F'][x]
+    bin+='0'*11
+    print_bin(bin)
     return
+
+def print_bin(s):
+    if s[:5]!='11010':
+        ans.write(s+'\n')
+    else:
+        ans.write(s)
+    return
+
 def bin_gen(list):
     for i in range(len(list)):
         temp_inst=rem_label(list[i])
@@ -218,9 +291,7 @@ def bin_gen(list):
             elif temp_inst[:2] in mms[15:19]:
                 conv_e(temp_inst,i)
             elif temp_inst[:2] in mms[19:20]:
-                conv_f(temp_inst,i)    
-        pass
-    
+                conv_f(temp_inst,i)
     return
 
 #########################################################################################################
@@ -247,8 +318,8 @@ if __name__=='__main__':
     for l in range(len(list)):
         if len(list[l])!=0:
             final_list.append(list[l])
-
     error_check(final_list)
+    len_without_varz=len(final_list)-len(varz)
     if not error_present:
         bin_gen(final_list)
     
