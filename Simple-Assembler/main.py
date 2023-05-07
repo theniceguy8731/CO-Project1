@@ -1,8 +1,8 @@
-error_present=False
-halt_present=False
-varz={}
-labels={}
-inst=[]
+error_present=False #check for error in the code
+halt_present=False #check if the code has halt in it
+varz={} #dictionary of variable
+labels={} #dictionary of labels
+inst=[] # list of instruction line numbers
 mms=['ad', 'su', 'mu', 'xo', 'or', 'an', 'mo', 'rs', 'ls', 'mo', 'di', 'no', 'cm', 'ld', 'st', 'jm', 'jl', 'jg', 'je', 'hl']
 sp_sym=',$#@!%^&*()\{\}[]-+=\|;:""<>,.?/`~'
 op_codes={'A':{'add':'00000','sub':'00001','mul':'00110','xor':'01010','or':'01011','and':'01100'},'B':{'mov':'00010','rs':'01000','ls':'01001'},'C':{'mov':'00011','div':'00111','not':'01101','cmp':'01110'},'D':{'ld':'00100','st':'00101'},'E':{'jmp':'01111','jlt':'11100','jgt':'11101','je':'11111'},'F':{'hlt':'11010'}}
