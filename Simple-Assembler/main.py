@@ -198,6 +198,7 @@ def error_check(list):
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
+#5 bits for opcode, 2 unused, 3 registors 3 bit each
 def conv_a(s,n):
     bin=''
     for x in op_codes['A'].keys():
@@ -212,6 +213,7 @@ def conv_a(s,n):
     bin+=regs[c]
     print_bin(bin)
     return
+#5 bits for opcode, 1 unused, 1 registors 3 bit, 1 imm
 def conv_b(s,n):
     bin=''
     for x in op_codes['B'].keys():
@@ -226,6 +228,7 @@ def conv_b(s,n):
     bin+=format(int(b),'07b')
     print_bin(bin)
     return
+#5 bits for opcode, 5 unused, 2 registors 3 bit each
 def conv_c(s,n):
     bin=''
     for x in op_codes['C'].keys():
@@ -239,6 +242,7 @@ def conv_c(s,n):
     bin+=regs[b]
     print_bin(bin)
     return
+#5 bits for opcode, 1 unused, 1 registors 3 bit, variable in place of mem address
 def conv_d(s,n):
     bin=''
     for x in op_codes['D'].keys():
@@ -253,6 +257,7 @@ def conv_d(s,n):
     bin+=format(len_without_varz+varz[b],"07b")
     print_bin(bin)
     return
+#5 bits for opcode, 4 unused, 1 mem address
 def conv_e(s,n):
     bin=''
     for x in op_codes['E'].keys():
@@ -265,6 +270,7 @@ def conv_e(s,n):
     bin+=format(labels[b]-len(varz),"07b")
     print_bin(bin)
     return
+#5 bits for opcode, 11 unsued
 def conv_f(s,n):
     bin=''
     for x in op_codes['F'].keys():
@@ -275,28 +281,35 @@ def conv_f(s,n):
     bin+='0'*11
     print_bin(bin)
     return
-
+#this  will print the binary code to stdout
 def print_bin(s):
     print(s)
     return
-
+#main conversion for binary text file
 def bin_gen(list):
     for i in range(len(list)):
         temp_inst=rem_label(list[i])
         if i in inst:
             temp_inst=rem_label(list[i])
+            #type a
             if temp_inst[:2] in mms[:6]:
                 conv_a(temp_inst,i)
+                #type b
             elif temp_inst[:2] in mms[6:9] and '$' in temp_inst:
                 conv_b(temp_inst,i)
+                #type c
             elif temp_inst[:2] in mms[9:13]: 
                 conv_c(temp_inst,i)
+                #type d
             elif temp_inst[:2] in mms[13:15]:
                 conv_d(temp_inst,i)
+                #type e
             elif temp_inst[:2] in mms[15:19]:
                 conv_e(temp_inst,i)
+                #type f
             elif temp_inst[:2] in mms[19:20]:
                 conv_f(temp_inst,i)
+                #type g
     return
 
 #########################################################################################################
