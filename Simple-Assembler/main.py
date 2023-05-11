@@ -17,7 +17,7 @@ def rem_label(s):
     if ':' in s:
         return s[s.index(':')+2:]
     return s
-#now we will proceed with functions which check specific type of errors
+#now we will proceed with functions which check specific type of instructions
 def check_a(s,n):
     if s[:3] in op_codes['A'].keys() or s[:2] in op_codes['A'].keys():
         if len(s.split(' '))==4:
