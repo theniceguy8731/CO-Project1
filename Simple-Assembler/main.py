@@ -12,11 +12,12 @@ file=open('errors.txt','w')
 
 
 #these are the functions to check specific types of instructions
+#removes the label from the starting of the instruction if required
 def rem_label(s):
     if ':' in s:
         return s[s.index(':')+2:]
     return s
-
+#now we will proceed with functions which check specific type of errors
 def check_a(s,n):
     if s[:3] in op_codes['A'].keys() or s[:2] in op_codes['A'].keys():
         if len(s.split(' '))==4:
@@ -148,31 +149,36 @@ def print_inst_error(n,linen=0):
     return
 #this classifies and saves each statement given to it according to its correct place
 def classify(s,n):
+    # checking : to find labels
     if ':' in s:
         labels[s[:s.index(':')]]=n
         inst.append(n)
         return 'label'
+    #finding var to checking for variables
     
     if s[:3]=='var':
         if len(s.split(' '))==2:
             if sym_check(s.split()[1]):
                 varz[s.split()[1]]=n
                 return 'var'
-    
+    #to check if an instruction is from ISA
     if s[:2] in mms:
         inst.append(n)
         return 'inst'
     
     return 'None'
-
+#the main error checking code which calls all other functions
 def error_check(list):
+    #we will first parse through the instruction to find its type
+    #storing the number on which labels and variables are present
     for l in range(len(list)):
         ty=classify(list[l],l)
         if ty=='None':
             print_inst_error(100,l)
         # till here we have classified and saved all the instructions
         # according to their classification into var declaration
-        # instruction and label and otherwise general errors
+        # instruction and label and otherwise general error
+        
     inst_check(list)
     for l in range(len(list)):
         if 'FLAGS' in list[l]:
@@ -329,8 +335,10 @@ if __name__=='__main__':
     for l in range(len(list)):
         if len(list[l])!=0:
             final_list.append(list[l])
+    # first we need to check the errors in the code
     error_check(final_list)
     len_without_varz=len(final_list)-len(varz)
     if not error_present:
+        #after checking for errors,we finally convert the code to binary
         bin_gen(final_list)
 file.close()
