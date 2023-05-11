@@ -296,8 +296,11 @@ def bin_gen(list):
 #########################################################################################################
 #########################################################################################################
 #########################################################################################################
+#main running 
 if __name__=='__main__':
+    #string to store code
     list=''
+    #taking inputt
     while True:
     # f=open('./assembler/file.txt',"r")
     # list = f.read()
@@ -308,6 +311,7 @@ if __name__=='__main__':
             break
     i=1
     temp_len=len(list)
+    #modifying the format of the code to account for irregularaties
     interim=''
     interim+=list[0]
     while i<temp_len:
@@ -320,6 +324,7 @@ if __name__=='__main__':
     list=interim.split('\n')
     for l in range(len(list)):
         list[l]=list[l].strip()
+     #the final list with all the instructions stored as members of the list
     final_list=[]
     for l in range(len(list)):
         if len(list[l])!=0:
