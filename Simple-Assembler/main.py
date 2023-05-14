@@ -149,9 +149,12 @@ def print_inst_error(n,linen=0):
 def classify(s,n):
     # checking : to find labels
     if ':' in s:
-        labels[s[:s.index(':')]]=n
-        inst.append(n)
-        return 'label'
+        if s.index(':')!=0:
+            labels[s[:s.index(':')]]=n
+            inst.append(n)
+            return 'label'
+        else:
+            print_inst_error(100,n)
     #finding var to checking for variables
     
     if s[:3]=='var':
