@@ -9,8 +9,6 @@ op_codes={'A':{'add':'00000','sub':'00001','mul':'00110','xor':'01010','or':'010
 regs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','R6':'110','FLAGS':'111'}
 file=open('errors.txt','w')
 #functions for some specific checks
-
-
 #these are the functions to check specific types of instructions
 #removes the label from the starting of the instruction if required
 def rem_label(s):
