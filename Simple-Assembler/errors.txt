@@ -1,0 +1,2 @@
+error : use of undefined variable 8
+error : use of undefined variable 9

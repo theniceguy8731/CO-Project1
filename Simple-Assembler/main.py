@@ -13,22 +13,27 @@ file=open('errors.txt','w')
 #removes the label from the starting of the instruction if required
 def rem_label(s):
     if ':' in s:
-        return s[s.index(':')+2:]
+        return s[s.index(':')+2:].strip()
     return s
 #now we will proceed with functions which check specific type of instructions
 def check_a(s,n):
     if s[:3] in op_codes['A'].keys() or s[:2] in op_codes['A'].keys():
+        print(s.split(' '))
         if len(s.split(' '))==4:
             temp_flag=True
             for reg in s.split(' ')[1:]:
                 if reg not in regs.keys():
+                    print(reg)
                     temp_flag=False
             if not temp_flag:
+                print(1)
                 print_inst_error(1,n)
 
         else:
+            print(2)
             print_inst_error(1,n)
     else:
+        print(3)
         print_inst_error(100,n)
     return
 
@@ -85,6 +90,7 @@ def check_e(s,n):
         print_inst_error(100,n)
     return
 def check_f(s,n):
+    s=rem_label(s).strip()
     if s[:3]=='hlt':
         global halt_present
         halt_present=True
@@ -122,6 +128,7 @@ def print_inst_error(n,linen=0):
     global error_present
     if not error_present:
         error_present=True
+    linen+=1
     if n==1:
         file.write(f"error : typos in instruction name or register name on line {linen}\n")
     elif n==2:
@@ -282,7 +289,7 @@ def conv_f(s,n):
         elif s[:2]==x:
             bin+=op_codes['F'][x]
     bin+='0'*11
-    print_bin(bin)
+    print_bin(bin,end='')
     return
 #this  will print the binary code to stdout
 def print_bin(s):
@@ -343,6 +350,7 @@ if __name__=='__main__':
             interim+=list[i]
         temp_len=len(list)
         i=i+1
+    interim=interim.replace('\t',' ')
     list=interim.split('\n')
     for l in range(len(list)):
         list[l]=list[l].strip()
