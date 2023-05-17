@@ -125,27 +125,27 @@ def print_inst_error(n,linen=0):
         error_present=True
     linen+=1
     if n==1:
-        file.write(f"error : typos in instruction name or register name on line {linen}\n")
+        print(f"error : typos in instruction name or register name on line {linen}\n")
     elif n==2:
-        file.write(f"error : use of undefined variable {linen}\n")        
+        print(f"error : use of undefined variable {linen}\n")        
     elif n==3:
-        file.write(f"error : use of undefined labels {linen}\n")
+        print(f"error : use of undefined labels {linen}\n")
     elif n==4:
-        file.write(f"error : illegal use of flags register {linen}\n")
+        print(f"error : illegal use of flags register {linen}\n")
     elif n==5:
-        file.write(f"error : illegal immediate values {linen}\n")
+        print(f"error : illegal immediate values {linen}\n")
     elif n==6:
-        file.write(f"error : misuse of labels as variable  {linen}\n")
+        print(f"error : misuse of labels as variable  {linen}\n")
     elif n==7:
-        file.write(f"error : misuse of variables as labels  {linen}\n")
+        print(f"error : misuse of variables as labels  {linen}\n")
     elif n==8:
-        file.write(f"error : variables not declared at the beginning \n")
+        print(f"error : variables not declared at the beginning \n")
     elif n==9:
-        file.write(f"error : missing halt instruction at the end\n")
+        print(f"error : missing halt instruction at the end\n")
     elif n==10:
-        file.write(f"error : halt not being used as last instruction or more than one halt {linen}\n")
+        print(f"error : halt not being used as last instruction or more than one halt {linen}\n")
     else:
-        file.write(f'error : general syntax error {linen}\n')
+        print(f'error : general syntax error {linen}\n')
     return
 #this classifies and saves each statement given to it according to its correct place
 def classify(s,n):
