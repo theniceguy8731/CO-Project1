@@ -7,7 +7,7 @@ mms=['ad', 'su', 'mu', 'xo', 'or', 'an', 'mo', 'rs', 'ls', 'mo', 'di', 'no', 'cm
 sp_sym=',$#@!%^&*()\{\}[]-+=\|;:""<>,?/`~'
 op_codes={'A':{'add':'00000','sub':'00001','mul':'00110','xor':'01010','or':'01011','and':'01100'},'B':{'mov':'00010','rs':'01000','ls':'01001'},'C':{'mov':'00011','div':'00111','not':'01101','cmp':'01110'},'D':{'ld':'00100','st':'00101'},'E':{'jmp':'01111','jlt':'11100','jgt':'11101','je':'11111'},'F':{'hlt':'11010'}}
 regs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','R6':'110','FLAGS':'111'}
-file=open('errors.txt','w')
+# file=open('errors.txt','w')
 #functions for some specific checks
 #these are the functions to check specific types of instructions
 #removes the label from the starting of the instruction if required
@@ -360,4 +360,4 @@ if __name__=='__main__':
     if not error_present:
         #after checking for errors,we finally convert the code to binary
         bin_gen(final_list)
-file.close()
+# file.close()
