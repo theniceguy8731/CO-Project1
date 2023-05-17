@@ -18,22 +18,17 @@ def rem_label(s):
 #now we will proceed with functions which check specific type of instructions
 def check_a(s,n):
     if s[:3] in op_codes['A'].keys() or s[:2] in op_codes['A'].keys():
-        print(s.split(' '))
         if len(s.split(' '))==4:
             temp_flag=True
             for reg in s.split(' ')[1:]:
                 if reg not in regs.keys():
-                    print(reg)
                     temp_flag=False
             if not temp_flag:
-                print(1)
                 print_inst_error(1,n)
 
         else:
-            print(2)
             print_inst_error(1,n)
     else:
-        print(3)
         print_inst_error(100,n)
     return
 
@@ -53,7 +48,7 @@ def check_b(s,n):
 def check_c(s,n):
     if s[:3] in op_codes['C'].keys():
         if len(s.split(' '))==3:
-            if s.split(' ')[1] not in regs.keys() or s.split(' ')[2] not in regs.keys():
+            if s.split(' ')[1] not in regs.keys() or s.split(' ')[2] not in regs.keys() or s.split(' ')[1]=='FLAGS':
                 print_inst_error(1,n)
         else:
             print_inst_error(1,n)
@@ -289,7 +284,7 @@ def conv_f(s,n):
         elif s[:2]==x:
             bin+=op_codes['F'][x]
     bin+='0'*11
-    print_bin(bin,end='')
+    print_bin(bin)
     return
 #this  will print the binary code to stdout
 def print_bin(s):
