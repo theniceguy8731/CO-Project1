@@ -2,18 +2,19 @@ pc=0
 bin=[]
 regz=[0,0,0,0,0,0,0,0]
 def mem_dump():
-    for i in bin:
-        print(i)
+    for i in range(len(bin)):
+        print(bin[i],end='')
+        if i!=len(bin)-1:
+            print()
 
 def print_state():
     #print pc
-    print(format(pc, '08b'), end = " ")
+    print(format(pc, '07b'), end ="        ")
     # print regz
     for i in range(len(regz)):
-        if i==7:
-            print(regz[i], end =" ")
-        else:
-            print(format(regz[i], '016b'), end =" ")
+        print(format(regz[i], '016b'), end ="")
+        if i!=len(regz)-1:
+            print(" ",end='')
     print()
 
 if __name__=='__main__':
@@ -173,6 +174,7 @@ if __name__=='__main__':
             print_state()
             break
         else:
+            print(inst[:5])
             print("invalid entry")
             break
 
