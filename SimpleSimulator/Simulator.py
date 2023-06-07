@@ -1,9 +1,20 @@
 pc=0
 bin=[]
 regz=[0,0,0,0,0,0,0,0]
+def twos_complement(binary):
+    if binary[0] == '-':
+        binary = binary[1:]
+    decimal = int(binary, 2)
+    inverted = decimal ^ ((1 << len(binary)) - 1)
+    twos_comp = format(inverted + 1, '0' + str(len(binary)) + 'b')
+    return "1"+twos_comp
+
 def mem_dump():
     for i in range(len(bin)):
-        print(bin[i],end='')
+        if bin[i][0]=='-':
+            print(twos_complement(bin[i]),end='')
+        else:
+            print(bin[i],end='')
         if i!=len(bin)-1:
             print()
 
