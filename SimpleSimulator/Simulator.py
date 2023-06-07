@@ -110,7 +110,7 @@ if __name__=='__main__':
         #move register
         elif inst[:5]=='00011':
             regz[int(inst[10:13],2)]=regz[int(inst[13:16],2)]
-            regz[7]=0
+            #regz[7]=0
             print_state()
         #divide
         elif inst[:5]=='00111':
@@ -141,13 +141,13 @@ if __name__=='__main__':
 ######################################################################################################
         #load
         elif inst[:5]=='00100':
-            regz[7]=0
+            #regz[7]=0
             regz[int(inst[6:9], 2)] = int(bin[int(inst[9:], 2)], 2)
             print_state()
         #store
         elif inst[:5]=='00101':
             bin[int(inst[9:], 2)] = format(regz[int(inst[6:9], 2)], '016b')
-            regz[7]=0
+            #regz[7]=0
             print_state()
 ######################################################################################################
         #unconditional jump
