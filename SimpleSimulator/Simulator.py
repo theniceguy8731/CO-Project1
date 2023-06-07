@@ -24,7 +24,7 @@ def print_state():
     # print regz
     for i in range(len(regz)):
         if format(regz[i], '016b')[0]=='-':
-            print("1111111111111111",end='')
+            print(twos_complement(format(regz[i], '016b')),end='')
             
         else:
             print(format(regz[i], '016b'), end ="")
