@@ -12,7 +12,11 @@ def print_state():
     print(format(pc, '07b'), end ="        ")
     # print regz
     for i in range(len(regz)):
-        print(format(regz[i], '016b'), end ="")
+        if format(regz[i], '016b')[0]=='-':
+            print("1111111111111111",end='')
+            
+        else:
+            print(format(regz[i], '016b'), end ="")
         if i!=len(regz)-1:
             print(" ",end='')
     print()
