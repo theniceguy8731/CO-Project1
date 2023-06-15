@@ -6,7 +6,7 @@ import os
 class AsmGrader(Grader):
 
 	SIMPLE_MARKS = 0.5
-	HARD_MARKS = 1.5
+	HARD_MARKS = 0.5
 
 	ASM_ERROR_DIR = "errorGen"
 	ASM_HARD_DIR = "hardBin"
